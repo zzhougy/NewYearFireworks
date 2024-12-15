@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>跨年倒计时</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #000;
+            overflow: hidden;
+        }
+
+        .countdown-container {
+            color: #fff;
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2em;
+        }
+
+        #countdown {
+            margin-top: 20px;
+        }
+
+        #countdown span {
+            display: inline-block;
+            margin: 0 10px;
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="countdown-container">
+        <h1>跨年倒计时</h1>
+        <div id="countdown">
+            <span id="days">00</span>天
+            <span id="hours">00</span>小时
+            <span id="minutes">00</span>分钟
+            <span id="seconds">00</span>秒
+        </div>
+    </div>
+    <canvas id="fireworks-canvas"></canvas>
+  <script>
+    let countdownSpeed = 100; // 每 100 毫秒更新一次
+    const timeAcceleration = 720000; // 时间加速倍数：1 秒 = 60 秒
+    const countdownElement = document.getElementById('countdown');
+
+    // 手动模拟当前时间
+    const newYear = new Date('January 1, 2025 00:00:00').getTime();
+    let virtualNow = new Date().getTime();
+
+    function countdown() {
+        // 按照加速倍数推进时间
+        virtualNow += timeAcceleration * (1000 / (1000 / countdownSpeed));
+        let distance = newYear - virtualNow;
+
+        if (distance < 0) {
+            clearInterval(interval);
+            countdownElement.innerHTML = "跨年快乐！🎉";
+            showFireworks(); // 显示烟花效果
+            return;
+        }
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById('days').textContent = days.toString().padStart(2, '0');
+        document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+        document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+        document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+    }
+
+    let interval = setInterval(countdown, countdownSpeed);
+
+    function showFireworks() {
+        // alert("新年到来，烟花绽放！");
+        window.location.href = 'index.html';
+
+    }
+</script>
+
+</body>
+</html>
