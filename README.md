@@ -1,8 +1,8 @@
-<div align="center"/>
-
 # 新年烟花
 
 实现新年倒计时后放烟花的效果
+
+![image.png](assets/img.png)
 
 ![image.png](assets/image.png)
 
