@@ -458,34 +458,106 @@
 
         @media (max-width: 768px) {
             h1 {
-                font-size: 2.5em;
-                margin-bottom: 50px;
+                font-size: 2em;
+                margin-bottom: 40px;
             }
 
             h1::after {
                 font-size: 0.7em;
-                bottom: -35px;
-                letter-spacing: 2px;
-            }
-
-            .time-value {
-                font-size: 2.8em;
-                min-width: 80px;
-                padding: 15px 20px;
-            }
-
-            .time-label {
-                font-size: 1.1em;
-                margin-top: 10px;
+                bottom: -30px;
             }
 
             #countdown {
                 gap: 15px;
+                padding: 0 10px;
+            }
+
+            .time-block {
+                transform: none !important;
+                animation: none !important;
+            }
+
+            .time-value {
+                font-size: 2.5em;
+                min-width: 60px;
+                padding: 15px;
+            }
+
+            .time-unit {
+                font-size: 1.2em;
+            }
+
+            .background-clock {
+                width: 300px;
+                height: 300px;
+                opacity: 0.3;
+            }
+
+            .clock-mark {
+                transform-origin: 50% 150px;
+            }
+
+            .hours-hand {
+                height: 80px;
+            }
+
+            .minutes-hand {
+                height: 100px;
+            }
+
+            .seconds-hand {
+                height: 120px;
             }
 
             .message {
                 font-size: 1em;
+                padding: 10px 20px;
                 bottom: 20px;
+            }
+
+            .glow-sphere {
+                opacity: 0.2;
+            }
+
+            .final-countdown {
+                font-size: 4em !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .time-value {
+                font-size: 2em;
+                min-width: 50px;
+                padding: 12px;
+            }
+
+            .time-unit {
+                font-size: 1em;
+            }
+
+            .background-clock {
+                width: 200px;
+                height: 200px;
+            }
+
+            .clock-mark {
+                transform-origin: 50% 100px;
+            }
+
+            .hours-hand {
+                height: 60px;
+            }
+
+            .minutes-hand {
+                height: 80px;
+            }
+
+            .seconds-hand {
+                height: 90px;
             }
         }
     </style>
@@ -618,7 +690,7 @@
         const newYear = new Date('January 1, 2025 00:00:00').getTime();
         const now = new Date().getTime();
         // let virtualNow = now;
-        let virtualNow = new Date('December 31, 2024 23:59:55').getTime();
+        let virtualNow = new Date('December 31, 2024 23:59:40').getTime();
 
         function countdown() {
             let distance = newYear - virtualNow;
