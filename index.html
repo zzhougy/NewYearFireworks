@@ -120,7 +120,6 @@ Copyright 2024 zzhougy
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
             position: relative;
             display: inline-block;
-            animation: titleFloat 3s ease-in-out infinite;
         }
 
         @keyframes titleFloat {
@@ -728,7 +727,8 @@ Copyright 2024 zzhougy
             updateWithAnimation('seconds', seconds);
 
             // 更新时钟显示
-            updateClock(hours, minutes, seconds);
+            const currentTime = new Date(virtualNow);
+            updateClock(currentTime.getHours(), currentTime.getMinutes(), currentTime.getSeconds());
 
             virtualNow += 1000;
         }
@@ -759,9 +759,9 @@ Copyright 2024 zzhougy
             // 时针：每小时转30度(360/12)，分钟需要加上偏移量
             // 分针：每分钟转6度(360/60)
             // 秒针：每秒转6度(360/60)
-            const hoursAngle = ((23 - hours) * 30) + ((60 - minutes) * 0.5); // 0.5 = 30/60
-            const minutesAngle = (60 - minutes) * 6;
-            const secondsAngle = (60 - seconds) * 6;
+            const hoursAngle = (hours * 30) + (minutes * 0.5); // 0.5 = 30/60
+            const minutesAngle = minutes * 6;
+            const secondsAngle = seconds * 6;
 
             // 使用 rotate 来旋转指针，角度为正值代表顺时针旋转
             hoursHand.style.transform = `rotate(${hoursAngle}deg)`;
