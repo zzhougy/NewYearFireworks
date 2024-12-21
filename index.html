@@ -581,6 +581,102 @@ Copyright 2024 zzhougy
                 height: 90px;
             }
         }
+
+        /* 添加震动动画 */
+        @keyframes shake {
+            0%, 100% { 
+                transform: translate(-50%, -50%) scale(1);
+            }
+            10%, 30%, 50%, 70%, 90% { 
+                transform: translate(-52%, -50%) scale(1);
+            }
+            20%, 40%, 60%, 80% { 
+                transform: translate(-48%, -50%) scale(1);
+            }
+        }
+
+        @keyframes shakeMobile {
+            0%, 100% { 
+                transform: translate(-50%, -50%) scale(1.1);
+            }
+            10%, 30%, 50%, 70%, 90% { 
+                transform: translate(-52%, -50%) scale(1.1);
+            }
+            20%, 40%, 60%, 80% { 
+                transform: translate(-48%, -50%) scale(1.1);
+            }
+        }
+
+        @keyframes shakeSmall {
+            0%, 100% { 
+                transform: translate(-50%, -50%) scale(1);
+            }
+            10%, 30%, 50%, 70%, 90% { 
+                transform: translate(-52%, -50%) scale(1);
+            }
+            20%, 40%, 60%, 80% { 
+                transform: translate(-48%, -50%) scale(1);
+            }
+        }
+
+        .background-clock.final-countdown {
+            position: fixed !important;
+            top: 50% !important;
+            left: 50% !important;
+            transform: translate(-50%, -50%) !important;
+            border-color: rgba(255, 56, 96, 0.3);
+            z-index: 999 !important;
+            animation: clockPulse 1s ease-in-out infinite !important;
+        }
+
+        .shaking .background-clock.final-countdown {
+            animation: shake 0.5s ease-in-out infinite !important;
+        }
+
+        @media (max-width: 768px) {
+            .background-clock {
+                width: 300px;
+                height: 300px;
+                opacity: 0.3;
+            }
+
+            .background-clock.final-countdown {
+                width: 300px !important;
+                height: 300px !important;
+                opacity: 1 !important;
+            }
+
+            .shaking .background-clock.final-countdown {
+                animation: shakeMobile 0.5s ease-in-out infinite !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .background-clock {
+                width: 200px;
+                height: 200px;
+            }
+
+            .background-clock.final-countdown {
+                width: 200px !important;
+                height: 200px !important;
+            }
+
+            .shaking .background-clock.final-countdown {
+                animation: shakeSmall 0.5s ease-in-out infinite !important;
+            }
+        }
+
+        @keyframes clockPulse {
+            0%, 100% { 
+                transform: translate(-50%, -50%) scale(1);
+                box-shadow: 0 0 50px rgba(255, 56, 96, 0.2);
+            }
+            50% { 
+                transform: translate(-50%, -50%) scale(1.05);
+                box-shadow: 0 0 100px rgba(255, 56, 96, 0.4);
+            }
+        }
     </style>
 </head>
 <body>
@@ -710,7 +806,7 @@ Copyright 2024 zzhougy
         const newYear = new Date('January 1, 2025 00:00:00').getTime();
         const now = new Date().getTime();
         // let virtualNow = now;
-        let virtualNow = new Date('December 31, 2024 23:59:45').getTime();
+        let virtualNow = new Date('December 31, 2024 23:59:48').getTime();
 
         function countdown() {
             let distance = newYear - virtualNow;
@@ -735,13 +831,13 @@ Copyright 2024 zzhougy
                 secondsElement.classList.add('final-countdown');
                 
                 // 添加震动效果
-                if (!document.body.classList.contains('shaking')) {
-                    document.body.classList.add('shaking');
+                if (!clockElement.classList.contains('shaking')) {
+                    clockElement.classList.add('shaking');
                 }
             } else {
                 clockElement.classList.remove('final-countdown');
                 secondsElement.classList.remove('final-countdown');
-                document.body.classList.remove('shaking');
+                clockElement.classList.remove('shaking');
             }
 
             updateWithAnimation('days', days);
