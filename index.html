@@ -423,6 +423,29 @@ Copyright 2024 zzhougy
             padding: 10px 20px;
         }
 
+        .final-countdown .clock-mark {
+            left: 47% !important;
+            transform-origin: 0 300px !important;
+        }
+
+        @media (max-width: 768px) {
+            .final-countdown {
+                transform: scale(1.1) !important;
+            }
+
+            .final-countdown .clock-mark {
+                left: 47% !important;
+                transform-origin: 0 150px !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .final-countdown .clock-mark {
+                left: 47% !important;
+                transform-origin: 0 100px !important;
+            }
+        }
+
         .background-clock.final-countdown {
             border-color: rgba(255, 56, 96, 0.3);
             animation: clockPulse 1s ease-in-out infinite;
