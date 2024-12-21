@@ -1,8 +1,13 @@
+<!--
+Copyright 2022 NianBroken. All rights reserved.
+Modified 2024 zzhougy. All rights reserved.
+本项目采用 Apache-2.0 许可证
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>🎉新年快乐~</title>
+  <title>新年快乐~</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -14,6 +19,36 @@
   <meta name="msapplication-TileImage" content="./images/favicon.png" />
   <link href="./fonts/css.css" rel="stylesheet" />
   <link rel="stylesheet" href="./css/style.css" />
+  <style>
+    .new-year-message {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(10px);
+      padding: 15px 30px;
+      border-radius: 15px;
+      color: white;
+      font-size: 20px;
+      font-weight: 700;
+      text-align: center;
+      z-index: 1000;
+      opacity: 0;
+      animation: fadeIn 1s ease-out forwards;
+    }
+
+    @keyframes fadeIn {
+      from { 
+        opacity: 0; 
+        transform: translateX(-50%) translateY(-20px);
+      }
+      to { 
+        opacity: 1; 
+        transform: translateX(-50%) translateY(0);
+      }
+    }
+  </style>
 </head>
 <body>
 <!-- partial:index.partial.html -->
@@ -42,9 +77,10 @@
 </div>
 <!-- App -->
 <div class="container">
+  <div class="new-year-message">祝愿2025年，所有美好如约而至 ✨</div>
   <div class="loading-init">
-    <div class="loading-init__header">加载中</div>
-    <div class="loading-init__status">正在装配烟花</div>
+    <div class="loading-init__header">新年烟花准备中</div>
+    <div class="loading-init__status">正在装配绚丽烟花...</div>
   </div>
   <div class="stage-container remove">
     <div class="canvas-container">
