@@ -2,9 +2,9 @@
 
 实现新年倒计时后放烟花的效果
 
-![image.png](assets/img.png)
+![image.png](assets/img_1.png)
 
-![image.png](assets/image.png)
+![image.png](assets/img_2.png)
 
 ## 说明
 
