@@ -349,9 +349,12 @@ Copyright 2024 zzhougy
             width: 600px;
             height: 600px;
             border-radius: 50%;
-            border: 2px solid rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
             pointer-events: none;
             z-index: -1;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(5px);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
         }
 
         .clock-face {
@@ -362,26 +365,13 @@ Copyright 2024 zzhougy
             background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, transparent 70%);
         }
 
-        .clock-marks {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            padding: 10px;
-            animation: rotate 60s linear infinite;
-        }
-
         .clock-mark {
             position: absolute;
             width: 2px;
             height: 15px;
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.4);
             left: 50%;
-            transform-origin: 50% 300px;
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+            transform-origin: 0 300px;
         }
 
         .clock-center {
@@ -390,10 +380,11 @@ Copyright 2024 zzhougy
             left: 50%;
             width: 20px;
             height: 20px;
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.8);
             border-radius: 50%;
             transform: translate(-50%, -50%);
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+            z-index: 4;
         }
 
         .clock-hand {
@@ -401,26 +392,27 @@ Copyright 2024 zzhougy
             bottom: 50%;
             left: 50%;
             transform-origin: 50% 100%;
-            background: linear-gradient(to top, rgba(255, 255, 255, 0.3), transparent);
         }
 
         .hours-hand {
             width: 4px;
             height: 150px;
-            animation: rotate 43200s linear infinite;
+            background: linear-gradient(to top, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.3));
+            z-index: 1;
         }
 
         .minutes-hand {
             width: 3px;
             height: 200px;
-            animation: rotate 3600s linear infinite;
+            background: linear-gradient(to top, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.3));
+            z-index: 2;
         }
 
         .seconds-hand {
             width: 2px;
             height: 250px;
-            background: linear-gradient(to top, rgba(255, 255, 255, 0.5), transparent);
-            animation: rotate 60s linear infinite;
+            background: linear-gradient(to top, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.4));
+            z-index: 3;
         }
 
         .final-countdown {
@@ -500,7 +492,8 @@ Copyright 2024 zzhougy
             }
 
             .clock-mark {
-                transform-origin: 50% 150px;
+                left: 50%;
+                transform-origin: 0 150px;
             }
 
             .hours-hand {
@@ -551,7 +544,7 @@ Copyright 2024 zzhougy
             }
 
             .clock-mark {
-                transform-origin: 50% 100px;
+                transform-origin: 0 100px;
             }
 
             .hours-hand {
@@ -572,8 +565,7 @@ Copyright 2024 zzhougy
     <div class="background-effects">
         <div class="glow-sphere"></div>
         <div class="background-clock">
-            <div class="clock-face"></div>
-            <div class="clock-marks">
+            <div class="clock-face">
                 <div class="clock-mark" style="transform: rotate(0deg)"></div>
                 <div class="clock-mark" style="transform: rotate(30deg)"></div>
                 <div class="clock-mark" style="transform: rotate(60deg)"></div>
@@ -696,7 +688,7 @@ Copyright 2024 zzhougy
         const newYear = new Date('January 1, 2025 00:00:00').getTime();
         const now = new Date().getTime();
         // let virtualNow = now;
-        let virtualNow = new Date('December 31, 2024 23:59:55').getTime();
+        let virtualNow = new Date('December 31, 2024 23:59:45').getTime();
 
         function countdown() {
             let distance = newYear - virtualNow;
@@ -763,9 +755,18 @@ Copyright 2024 zzhougy
             const minutesHand = document.querySelector('.minutes-hand');
             const secondsHand = document.querySelector('.seconds-hand');
 
-            hoursHand.style.transform = `rotate(${(hours % 12 + minutes / 60) * 30}deg)`;
-            minutesHand.style.transform = `rotate(${minutes * 6}deg)`;
-            secondsHand.style.transform = `rotate(${seconds * 6}deg)`;
+            // 计算角度：
+            // 时针：每小时转30度(360/12)，分钟需要加上偏移量
+            // 分针：每分钟转6度(360/60)
+            // 秒针：每秒转6度(360/60)
+            const hoursAngle = ((23 - hours) * 30) + ((60 - minutes) * 0.5); // 0.5 = 30/60
+            const minutesAngle = (60 - minutes) * 6;
+            const secondsAngle = (60 - seconds) * 6;
+
+            // 使用 rotate 来旋转指针，角度为正值代表顺时针旋转
+            hoursHand.style.transform = `rotate(${hoursAngle}deg)`;
+            minutesHand.style.transform = `rotate(${minutesAngle}deg)`;
+            secondsHand.style.transform = `rotate(${secondsAngle}deg)`;
         }
 
         // 添加鼠标移动视差效果
@@ -789,7 +790,7 @@ Copyright 2024 zzhougy
                 document.title = '2025新年倒计时 | 等你回来~';
             } else {
                 document.title = '2025新年倒计时';
-                virtualNow = new Date().getTime(); // 重置虚拟时间
+                virtualNow = new Date().getTime();
                 countdown();
             }
         });
