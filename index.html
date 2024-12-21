@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+<!--
+Copyright 2024 zzhougy
+新年倒计时界面
+-->
 <html lang="zh">
 <head>
     <meta charset="UTF-8">
@@ -25,7 +29,7 @@
             height: 100%;
             margin: 0;
             font-family: 'Noto Sans SC', sans-serif;
-            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background: linear-gradient(-45deg, #1a237e, #311b92, #004d40, #1a237e);
             background-size: 400% 400%;
             animation: gradient 15s ease infinite;
             overflow: hidden;
@@ -423,7 +427,9 @@
             animation: finalPulse 1s ease-in-out infinite;
             color: #ff3860;
             font-size: 8em !important;
-            text-shadow: 0 0 20px rgba(255, 56, 96, 0.8);
+            text-shadow: 0 0 20px rgba(255, 23, 68, 0.9);
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px 20px;
         }
 
         .background-clock.final-countdown {
@@ -690,7 +696,7 @@
         const newYear = new Date('January 1, 2025 00:00:00').getTime();
         const now = new Date().getTime();
         // let virtualNow = now;
-        let virtualNow = new Date('December 31, 2024 23:59:40').getTime();
+        let virtualNow = new Date('December 31, 2024 23:59:55').getTime();
 
         function countdown() {
             let distance = newYear - virtualNow;
