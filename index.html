@@ -805,14 +805,14 @@ Copyright 2024 zzhougy
 
         const newYear = new Date('January 1, 2025 00:00:00').getTime();
         const now = new Date().getTime();
-        // let virtualNow = now;
-        let virtualNow = new Date('December 31, 2024 23:59:48').getTime();
+        let virtualNow = now;
+        // let virtualNow = new Date('December 31, 2024 23:59:48').getTime();
 
         function countdown() {
             let distance = newYear - virtualNow;
 
             if (distance < 0) {
-                window.location.href = 'index3.html';
+                window.location.href = 'firework.html';
                 return;
             }
 
