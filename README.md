@@ -58,6 +58,45 @@ python3 -m http.server 8000
 
 然后在浏览器中访问 `http://localhost:8000`
 
+## 自定义配置
+
+你可以通过编辑 `js/config.js` 文件来个性化你的新年烟花体验，无需修改其他代码。
+
+打开 `js/config.js`，可以修改以下内容：
+
+```javascript
+const CONFIG = {
+    // 目标年份（倒计时目标）
+    targetYear: 2026,
+
+    // 文字烟花中显示的文字列表
+    fireworkWords: ["新年快乐", "心想事成"],
+
+    // 文字烟花字体和大小
+    wordFont: "Gabriola,华文琥珀",
+    wordFontSize: "90px",
+
+    // 页面标题
+    fireworkPageTitle: "新年快乐~",
+    countdownPageTitle: "新年倒计时",
+    countdownPageTitleHidden: "新年倒计时 | 等你回来~",
+
+    // 祝福消息（{year} 会自动替换为目标年份）
+    countdownMessage: "期待与你共同迎接{year}年的第一缕阳光",
+    newYearMessage: "祝愿{year}年，所有美好如约而至 ✨",
+
+    // 加载提示
+    loadingHeader: "新年烟花准备中",
+    loadingStatus: "正在装配绚丽烟花...",
+};
+```
+
+**示例：** 如果要添加更多文字烟花内容，只需修改 `fireworkWords` 数组：
+
+```javascript
+fireworkWords: ["新年快乐", "心想事成", "恭喜发财", "万事如意"],
+```
+
 ## 说明
 
 - 本项目基于 [Firework_Simulator](https://github.com/NianBroken/Firework_Simulator) 进行二次开发

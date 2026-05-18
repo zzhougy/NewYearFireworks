@@ -8,6 +8,7 @@ Copyright 2024 zzhougy
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>新年倒计时</title>
+    <script src="./js/config.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -128,7 +129,7 @@ Copyright 2024 zzhougy
         }
 
         h1::after {
-            content: "2026";
+            content: var(--target-year);
             position: absolute;
             bottom: -40px;
             left: 50%;
@@ -706,7 +707,7 @@ Copyright 2024 zzhougy
     <div class="stars"></div>
     <div class="particles"></div>
     <div class="countdown-container">
-        <h1>新年倒计时</h1>
+        <h1 id="page-title">新年倒计时</h1>
         <div id="countdown">
             <div class="time-block">
                 <div class="time-value" id="days">00</div>
@@ -726,9 +727,17 @@ Copyright 2024 zzhougy
             </div>
         </div>
     </div>
-    <div class="message">期待与你共同迎接2026年的第一缕阳光</div>
+    <div class="message" id="countdown-message">期待与你共同迎接2026年的第一缕阳光</div>
 
     <script>
+        // 应用配置
+        (function applyConfig() {
+            document.title = CONFIG.countdownPageTitle;
+            document.getElementById('page-title').textContent = CONFIG.countdownPageTitle;
+            document.getElementById('countdown-message').textContent = CONFIG.countdownMessage.replace('{year}', CONFIG.targetYear);
+            document.documentElement.style.setProperty('--target-year', '"' + CONFIG.targetYear + '"');
+        })();
+
         // 创建星星背景
         function createStars() {
             const starsContainer = document.querySelector('.stars');
@@ -803,7 +812,7 @@ Copyright 2024 zzhougy
         createLightBeams();
         setInterval(createParticles, 2000);
 
-        const newYear = new Date('January 1, 2026 00:00:00').getTime();
+        const newYear = new Date('January 1, ' + CONFIG.targetYear + ' 00:00:00').getTime();
         const now = new Date().getTime();
         let virtualNow = now;
         // let virtualNow = new Date('December 31, 2024 23:59:48').getTime();
@@ -906,9 +915,9 @@ Copyright 2024 zzhougy
 
         document.addEventListener('visibilitychange', function () {
             if (document.hidden) {
-                document.title = '新年倒计时 | 等你回来~';
+                document.title = CONFIG.countdownPageTitleHidden;
             } else {
-                document.title = '新年倒计时';
+                document.title = CONFIG.countdownPageTitle;
                 virtualNow = new Date().getTime();
                 countdown();
             }

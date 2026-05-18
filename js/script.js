@@ -77,11 +77,11 @@ const trailsStage = new Stage("trails-canvas");
 const mainStage = new Stage("main-canvas");
 const stages = [trailsStage, mainStage];
 
-//随机文字烟花内容
-const randomWords = ["新年快乐", "心想事成"];
+//随机文字烟花内容（从 config.js 读取）
+const randomWords = CONFIG.fireworkWords;
 const wordDotsMap = {};
 randomWords.forEach((word) => {
-	wordDotsMap[word] = MyMath.literalLattice(word, 3, "Gabriola,华文琥珀", "90px");
+	wordDotsMap[word] = MyMath.literalLattice(word, 3, CONFIG.wordFont, CONFIG.wordFontSize);
 });
 
 // 自定义背景

@@ -17,6 +17,7 @@ Modified 2024 zzhougy. All rights reserved.
   <link rel="apple-touch-icon-precomposed" href="./images/favicon.png" />
   <meta name="msapplication-TileColor" content="#000000" />
   <meta name="msapplication-TileImage" content="./images/favicon.png" />
+  <script src="./js/config.js"></script>
   <link href="./fonts/css.css" rel="stylesheet" />
   <link rel="stylesheet" href="./css/style.css" />
   <style>
@@ -77,10 +78,10 @@ Modified 2024 zzhougy. All rights reserved.
 </div>
 <!-- App -->
 <div class="container">
-  <div class="new-year-message">祝愿2026年，所有美好如约而至 ✨</div>
+  <div class="new-year-message" id="new-year-message">祝愿2026年，所有美好如约而至 ✨</div>
   <div class="loading-init">
-    <div class="loading-init__header">新年烟花准备中</div>
-    <div class="loading-init__status">正在装配绚丽烟花...</div>
+    <div class="loading-init__header" id="loading-header">新年烟花准备中</div>
+    <div class="loading-init__status" id="loading-status">正在装配绚丽烟花...</div>
   </div>
   <div class="stage-container remove">
     <div class="canvas-container">
@@ -168,5 +169,12 @@ Modified 2024 zzhougy. All rights reserved.
 <script src="./js/Stage.js"></script>
 <script src="./js/MyMath.js"></script>
 <script src="./js/script.js"></script>
+<script>
+  // 应用配置到页面
+  document.title = CONFIG.fireworkPageTitle;
+  document.getElementById('new-year-message').textContent = CONFIG.newYearMessage.replace('{year}', CONFIG.targetYear);
+  document.getElementById('loading-header').textContent = CONFIG.loadingHeader;
+  document.getElementById('loading-status').textContent = CONFIG.loadingStatus;
+</script>
 </body>
 </html>
